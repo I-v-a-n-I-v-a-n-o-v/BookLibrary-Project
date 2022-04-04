@@ -1,0 +1,72 @@
+﻿@model BookLibrary.Models.Books.EditVM;
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "EDIT BOOK";
+}
+
+<section id="edit-page" class="edit">
+    <form id="edit-form" action="/Book/Edit" method="post">
+        <fieldset>
+            @Html.HiddenFor(m => m.Id)
+            <legend>Edit Book</legend>
+            <p class="field">
+                <label for="title">Title</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.Heading)
+                </span>
+            </p>
+            <p class="field">
+                <label for="description">Author</label>
+                <span class="input" value="@Model.Author">
+                    @Html.TextBoxFor(m => m.Author)
+                </span>
+            </p>
+            <p class="field">
+                <label for="description">Pages</label>
+                <span class="input">
+                    <input name="Pages" value="@Model.Pages">
+                </span>
+            </p>
+            <p class="field">
+                <label for="description">Description</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.Summary.Content)
+                </span>
+            </p>
+            <p class="field">
+                <label for="image">Image</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.Image.Url)
+                </span>
+            </p>
+            <p class="field">
+                <label for="image">Genre</label>
+                <span class="input">
+                    <select name="GenreId">
+                        @foreach (var item in Model.GenreCollection)
+                        {
+                            <option value="@item.Id">
+                                @item.Name
+                            </option>
+                        }
+                    </select>
+                </span>
+
+            </p>
+
+            <p class="field">
+                <label for="description">Release Date</label>
+                <input type="datetime-local" id="myLocalDate" name="ReleaseDate"  value="@Model.ReleaseDate"/>
+                <p>Click the button to set a local date and time for the datetime field.</p>
+            </p>
+
+            <p class="field">
+                <label for="description">Quantity</label>
+                <span class="input">
+                    <input name="Quantity" value=@Model.Quantity>
+                </span>
+            </p>
+            <input class="button submit" type="submit" value="Save">
+        </fieldset>
+    </form>
+</section>

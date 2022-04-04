@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\background.png" />
+    <None Include="wwwroot\images\book.png" />
+    <None Include="wwwroot\images\book1.png" />
+    <None Include="wwwroot\images\book2.png" />
+    <None Include="wwwroot\images\book3.png" />
+    <None Include="wwwroot\images\favicon.ico" />
+    <None Include="wwwroot\images\heart.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookLibrary.Models\BookLibrary.Models.csproj" />
+  </ItemGroup>
+
+</Project>

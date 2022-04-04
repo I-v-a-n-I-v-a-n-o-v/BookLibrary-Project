@@ -1,0 +1,111 @@
+﻿.subscription .boxContainer {
+    border: 1px solid white;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 550px;
+    padding: 45px 45px 20px 45px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255, 0.97);
+    ;
+    text-align: center;
+}
+
+.subscription .boxContainer {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 1em;
+}
+
+    .subscription .boxContainer .one {
+        grid-column: 1/2;
+    }
+
+    .subscription .boxContainer .box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .subscription .boxContainer .box ul li {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 10% 0;
+        }
+
+    .subscription .boxContainer .box .privileges {
+        border-top: 1px solid rgb(160, 160, 160);
+        border-bottom: 1px solid rgb(160, 160, 160);
+    }
+
+        .subscription .boxContainer .box .privileges p {
+            font-size: 1.2em;
+        }
+
+    .subscription .boxContainer .one .privileges {
+        height: 107.5px;
+    }
+
+        .subscription .boxContainer .one .privileges p {
+            vertical-align: middle;
+            position: relative !important;
+            height: 100% !important;
+            margin: 0;
+        }
+
+            .subscription .boxContainer .one .privileges p img {
+                padding-top: 25%;
+                left: 45%
+            }
+
+    .subscription .boxContainer .box .privileges sub {
+        vertical-align: baseline;
+        font-size: 1.2em !important;
+        color: green;
+        font-weight: bold;
+    }
+
+    .subscription .boxContainer .box ul .duration {
+        background-color: rgb(235, 3, 3);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        color: white;
+        font-size: 2em;
+    }
+
+    .subscription .boxContainer .box ul .booksPerOrder {
+        font-size: 1.3em;
+    }
+
+        .subscription .boxContainer .box ul .booksPerOrder p {
+            margin-top: 3px;
+            font-size: 0.7em;
+        }
+
+    /* price */
+    .subscription .boxContainer .box ul .price span {
+        font-size: 1.5em !important;
+    }
+
+    .subscription .boxContainer .box ul .price sub {
+        vertical-align: baseline;
+        font-size: 1.1em !important;
+    }
+
+    .subscription .boxContainer .box ul .price p {
+        font-size: 1.25em;
+        color: rgb(116, 116, 116);
+        margin-top: 6px;
+    }
+
+    .subscription .boxContainer .box ul:hover {
+        border: 1px solid red;
+        border-radius: 10px;
+    }
+
+        .subscription .boxContainer .box ul:hover .duration {
+            background-color: white;
+            color: red;
+            border-bottom: 1px solid rgb(160, 160, 160);
+        }

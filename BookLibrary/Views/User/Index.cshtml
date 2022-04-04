@@ -1,0 +1,51 @@
+﻿@model BookLibrary.Models.Users.IndexVM;
+@using BookLibrary.Models.Entities;
+
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Users";
+}
+
+
+<section id="dashboard-page" class="dashboard">
+    <h1>Dashboard</h1>
+    <!-- Display ul: with list-items for All books (If any) -->
+    @if (Model.allUsers.Count > 0)
+    {
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th><!--Button to see Password-->
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Type User</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (User currentUser in Model.allUsers)
+                    {
+                        <tr>
+                            <td>@currentUser.Username</td>
+                            <td>@currentUser.Password</td>
+                            <td>@currentUser.FirstName</td>
+                            <td>@currentUser.LastName</td>
+                            <td>@currentUser.TypeOfUser</td>
+                            <td><a class="button" href="/User/Edit?id=@currentUser.UserId">Edit</a></td>
+                            <td><a class="button" href="/User/Delete?id=@currentUser.UserId">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <!-- Display paragraph: If there are no books in the database -->
+        <p class="no-books">No books in database!</p>
+    }
+
+</section>

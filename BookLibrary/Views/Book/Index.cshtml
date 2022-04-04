@@ -1,0 +1,35 @@
+﻿@model BookLibrary.Models.Books.IndexVM
+@using BookLibrary.Models.Entities;
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Books";
+}
+
+<section id="dashboard-page" class="dashboard">
+    <h1>Dashboard</h1>
+    <!-- Display ul: with list-items for All books (If any) -->
+    @if (Model.BookCollection.Count > 0)
+    {
+    <ul class="other-books-list">
+       @foreach (Book currentBook in Model.BookCollection)
+       {
+        <li class="otherBooks">
+            <h3>@currentBook.Heading</h3>
+            <p>Genre @currentBook.Genre.Name</p>
+            @if(currentBook.ImageId != null){
+                <p class="img"><img src=@currentBook.Image.Url></p>
+            } @*else {
+            <p class="img"><img src=""></p>
+            }*@
+            <a class="button" href="/Book/Details?id=@currentBook.Id">Details</a>
+        </li>
+       }
+    </ul>
+    }
+    else
+    {
+    <!-- Display paragraph: If there are no books in the database -->
+    <p class="no-books">No books in database!</p>
+    }
+
+</section>

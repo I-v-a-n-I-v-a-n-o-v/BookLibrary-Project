@@ -1,0 +1,35 @@
+﻿@model BookLibrary.Models.Home.IndexVM
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "HOME";
+}
+
+<section id="dashboard-page" class="dashboard">
+    <h1>Welcome in BookLibrary!</h1>
+    <h2>Last added books:</h2>
+    <!-- Display ul: with list-items for All books (If any) -->
+    @if (Model.BookCollection.Count > 2)
+    {
+        <ul class="other-books-list">
+
+            @for (int i = 0; i < 3; i++)
+            {
+                <li class="otherBooks">
+                    <h3>@Model.BookCollection[i].Heading</h3>
+                    <p>Genre @Model.BookCollection[i].Genre.Name</p>
+                    @if (Model.BookCollection[i].ImageId != null)
+                    {
+                        <p class="img"><img src=@Model.BookCollection[i].Image.Url></p>
+                    }
+                    <a class="button" href="/Book/Details?id=@Model.BookCollection[i].Id">Details</a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <!-- Display paragraph: If there are no books in the database -->
+        <p class="no-books">No books in database!</p>
+    }
+
+</section>

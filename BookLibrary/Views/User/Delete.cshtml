@@ -1,0 +1,16 @@
+﻿@model BookLibrary.Models.Users.DeleteVm;
+
+@{ 
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Delete";
+}
+
+<form id="edit-form" action="/User/Delete" method="post">
+    <p class="field">
+        @Html.HiddenFor(user =>user.Id)
+        <label for="title">Do you want to delete</label>
+    </p>
+
+    <input class="button submit" type="submit" value="Yes"/>
+    <input class="button submit" onclick="window.location.href = '/User'" value="No"/>
+</form>

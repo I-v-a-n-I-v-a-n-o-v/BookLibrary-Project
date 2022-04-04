@@ -1,0 +1,39 @@
+﻿@model BookLibrary.Models.Users.UserInfoVM
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "UserInfo";
+}
+
+<section id="edit-page" class="edit" style="margin-left:10%;">
+    <form id="edit-form" action="/User/UserInfo" method="post">
+        <fieldset>
+            @Html.HiddenFor(user => user.Id)
+            <legend>Edit User</legend>
+            <p class="field">
+                <label for="Username">Username</label>
+                <span class="input" value="@Model.Username">
+                    @Html.TextBoxFor(user => user.Username)
+                </span>
+            </p>
+            <p class="field">
+                <label for="password">Password</label>
+                <span class="input" value="@Model.Password">
+                    @Html.TextBoxFor(user => user.Password)
+                </span>
+            </p>
+            <p class="field">
+                <label for="Firstname">Firstname</label>
+                <span class="input" value="@Model.Firstname">
+                    @Html.TextBoxFor(user => user.Firstname)
+                </span>
+            </p>
+            <p class="field">
+                <label for="Lastname">Lastname</label>
+                <span class="input" value="@Model.LastName">
+                    @Html.TextBoxFor(user => user.LastName)
+                </span>
+            </p>
+            <input class="button submit" type="submit" value="Save">
+        </fieldset>
+    </form>
+</section>

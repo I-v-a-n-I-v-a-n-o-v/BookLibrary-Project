@@ -1,0 +1,104 @@
+﻿@using BookLibrary.Models.Entities;
+@using BookLibrary.ExtentionMethods
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Subscription";
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+}
+<link rel="stylesheet" href="/styles/subscriptionStyle.css">
+
+@if (loggedUser != null)
+{
+    <aside class="subscription">
+        <h2 class="title">Subscription Plans</h2>
+
+        <div class="boxContainer">
+            <div class="box one">
+                <ul>
+                    <li class="duration">1 Month</li>
+                    <li class="booksPerOrder">
+                        5 books<br>
+                        <p>
+                            per order
+                        <p>
+                    </li>
+                    <li class="privileges">
+                        <p>
+                            <img src="/images/x.png" style="width: 20px; height: 20px;">
+                        </p>
+                    </li>
+                    <li class="price">
+                        <span>5</span>
+                        <sub>,90</sub>
+                        lv./
+                        <p>11,90 lv.</p>
+
+                        <form action="/Home/Subscribe" method="post">
+                            <button name="button" class="button submit" type="submit" value="oneMonth">Subscribe</button>
+                        </form>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="box two">
+                <ul>
+                    <li class="duration">6 Months</li>
+                    <li class="booksPerOrder">
+                        10 books<br>
+                        <p>
+                            per order
+                        <p>
+                    </li>
+                    <li class="privileges">
+                        <p>
+                            <sub>+</sub>like a book<br>
+                            <sub>+</sub>leave a comment
+                        </p>
+                    </li>
+                    <li class="price">
+                        <span>29</span>
+                        <sub>,90</sub>
+                        lv./
+                        <p>35,90 lv.</p>
+
+                        <form action="/Home/Subscribe" method="post">
+                            <button name="button" class="button submit" type="submit" value="sixMonths">Subscribe</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box three">
+                <ul>
+                    <li class="duration">12 Months</li>
+                    <li class="booksPerOrder">
+                        20 books<br>
+                        <p>
+                            per order
+                        <p>
+                    </li>
+                    <li class="privileges">
+                        <p>
+                            <sub>+</sub>like a book<br>
+                            <sub>+</sub>leave a comment
+                        </p>
+                    </li>
+                    <li class="price">
+                        <span>53</span>
+                        <sub>,90</sub>
+                        lv./
+                        <p>74,90 lv.</p>
+
+                        <form action="/Home/Subscribe" method="post">
+                            <button name="button" class="button submit" type="submit" value="twelveMonths">Subscribe</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        
+
+    </aside>
+}

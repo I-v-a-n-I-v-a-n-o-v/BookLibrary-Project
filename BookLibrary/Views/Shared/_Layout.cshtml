@@ -1,0 +1,85 @@
+﻿@using BookLibrary.Models.Entities;
+@using BookLibrary.ExtentionMethods
+@using BookLibrary.Models.Repositories
+
+@{
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+    Subscription subscription = this.ViewContext.HttpContext.Session.GetObject<Subscription>("subscription");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Online Books Library</title>
+</head>
+
+<body>
+    <div id="container">
+
+        <header id="site-header">
+            <!-- Navigation -->
+            <nav class="navbar">
+                <section class="navbar-dashboard">
+
+                    <a href="/Home">Books</a>
+                    @if (loggedUser == null)
+                    {
+                        <!-- Guest users -->
+                        <div id="guest">
+                            <a class="button" href="/Book">Books</a>
+                            <a class="button" href="/Home/Login">Login</a>
+                            <a class="button" href="/Home/Register">Register</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- Logged-in users -->
+                        <div id="user">
+                            <span>Welcome, @loggedUser.Username</span>
+                            @if (subscription != null && loggedUser.UserId == subscription.UserId)
+                            {
+                                <small>Subscription: @subscription.Name</small>
+                            }
+                            else
+                            {
+                                <small>No Subscription</small>
+                            }
+                            <a class="button" href="/Book">Books</a>
+                            @if (loggedUser.TypeOfUser == "admin" || loggedUser.TypeOfUser == "moderator")
+                            {
+                                <a class="button" href="/Book/Create">Add Book</a>
+                            }
+                            @if (loggedUser.TypeOfUser == "admin")
+                            {
+                                <a class="button" href="/User">Users</a>
+                                <a class="button" href="/User/Create">Add User</a>
+                            }
+                            @if (subscription == null)
+                            {
+                                <a class="button" href="/Home/Subscribe">Subscriptions</a>
+                            }
+                            @if (loggedUser.TypeOfUser != "admin")
+                            {
+                                <a class="button" href="/User/UserInfo">Info</a>
+                            }
+                            <a class="button" href="/Home/Logout">Logout</a>
+                        </div>
+                    }
+                </section>
+            </nav>
+        </header>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+
+        <footer id="site-footer">
+        </footer>
+    </div>
+</body>
+
+</html>

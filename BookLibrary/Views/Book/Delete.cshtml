@@ -1,0 +1,18 @@
+﻿@model BookLibrary.Models.Books.DeleteVM;
+
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Delete";
+}
+
+<form id="edit-form" action="/Book/Delete" method="post">
+    <p class="field">
+            @Html.HiddenFor(m => m.Id)
+            <label for="title">Do you want to delete?</label>
+
+        </p>
+
+    <input class="button submit" type="submit" value="Yes">
+    <input class="button submit" onclick="window.location.href='/Book/Details?id=@Model.Id'" value="No" />
+    
+</form>

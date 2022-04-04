@@ -1,0 +1,41 @@
+﻿@model BookLibrary.Models.Home.RegisterVM
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Register";
+}
+<section id="register-page" class="register">
+    <form id="register-form" action="" method="post">
+        <fieldset>
+            <legend>Register Form</legend>
+            <p class="field">
+                <label>First name</label>
+                <span class="input">
+                    @Html.TextBoxFor(n => n.FirstName)
+                </span>
+            </p>
+            <p class="field">
+                <label>Last name</label>
+                <span class="input">
+                    @Html.TextBoxFor(n => n.LastName)
+                </span>
+            </p>
+            <p class="field">
+                <label>Username</label>
+                <span class="input">
+                    @Html.TextBoxFor(n => n.Username)
+                </span>
+                @Html.ValidationMessageFor(m => m.Username)
+                @Html.ValidationMessage("usernameError")
+            </p>
+            <p class="field">
+                <label for="password">Password</label>
+                <span class="input">
+                    @Html.PasswordFor(n => n.Password)
+                </span>
+                @Html.ValidationMessageFor(m => m.Password)
+            </p>
+           
+            <input class="button submit" type="submit" value="Register">
+        </fieldset>
+    </form>
+</section>

@@ -1,0 +1,52 @@
+﻿@model BookLibrary.Models.Users.CreateVM;
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "CREATE USER";
+}
+
+<section id="create-page" class="create">
+    <form id="create-form" action="/User/Create" method="post">
+        <fieldset>
+            <legend>Add user</legend>
+            <p class="field">
+                <label for="Username">Username</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.Username)
+                </span>
+            </p>
+            <p class="field">
+                <label for="Password">Password</label>
+                <span class="input">
+                    @Html.PasswordFor(m => m.Password) <!--Add button to see password-->
+                </span>
+            </p>
+            <p class="field">
+                <label for="FirstName">FirstName</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.Firstname)
+                </span>
+            </p>
+
+            <p class="field">
+                <label for="LastName">LastName</label>
+                <span class="input">
+                    @Html.TextBoxFor(m => m.LastName)
+                </span>
+            </p>
+            <p class="field">
+                <label for="TypeUser">Type of User</label>
+                <span class="input">
+                    <select name="TypeOfUser">
+                        @foreach (var type in Model.Types)
+                        {
+                            <option value="@type">
+                                @type
+                            </option>
+                        }
+                    </select>
+                </span>
+            </p>
+            <input class="button submit" type="submit" value="Save">
+        </fieldset>
+    </form>
+</section>

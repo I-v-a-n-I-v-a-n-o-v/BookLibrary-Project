@@ -1,0 +1,118 @@
+﻿@model BookLibrary.Models.Books.DetailsVM;
+@using BookLibrary.Models.Entities;
+@using BookLibrary.ExtentionMethods
+
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Details";
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+    Subscription subscription = this.ViewContext.HttpContext.Session.GetObject<Subscription>("subscription");
+}
+
+<link rel="stylesheet" href="/styles/comment.css">
+<section id="details-page" class="details">
+    <div class="book-information">
+        <h3>@Model.Heading</h3>
+        <p class="type">Type: @Model.Genre</p>
+        <p class="img"><img src=@Model.ImageUrl></p>
+        <div class="actions">
+            <!-- Edit/Delete buttons ( Only for creator of this book )  -->
+            @if (loggedUser != null)
+            {
+                @if (loggedUser.TypeOfUser == "admin" || loggedUser.TypeOfUser == "moderator")
+                {
+                    <a class="button" href="/Book/Edit?id=@Model.BookId">Edit</a>
+                    <a class="button" href="/Book/Delete?id=@Model.BookId">Delete</a>
+                }
+            }
+
+            <!-- Bonus -->
+            <!-- Like button ( Only for logged-in users, which is not creators of the current book ) -->
+            <!-- ( for Guests and Users )  -->
+            <!--<div class="likes">
+        <img class="hearts" src="/images/heart.png">
+        <span id="total-likes">Likes: @Model.CountOfLikes </span>
+    </div> -->
+            <form class="likes" action="/Book/Like" method="post">
+                @if (subscription != null && (subscription.Name == "Six Months" ||
+                                                  subscription.Name == "Twelve Months"))
+                {
+                    <input class="button submit" type="submit" value="Like">
+                }
+                @Html.HiddenFor(m => m.BookId)
+                <span id="total-likes">Likes: @Model.CountOfLikes </span>
+
+
+            </form>
+            <span id="total-likes">In stock: @Model.Quantity </span>
+            <form class="likes" action="/Book/Order" method="post">
+                @if (subscription != null)
+                {
+                    @if((subscription.Name == "Six Months" && Model.CountOfAllOrderedBooks < 10 && Model.Quantity > 0) ||
+                        (subscription.Name == "Twelve Months" && Model.CountOfAllOrderedBooks < 20 && Model.Quantity > 0) ||
+                        (subscription.Name == "One Month" && Model.CountOfAllOrderedBooks < 5 && Model.Quantity > 0)){
+                            <input class="button submit" type="submit" value="Order">
+                    } 
+                }
+                @Html.HiddenFor(m => m.BookId)
+                @if (loggedUser != null)
+                {
+                    @if (Model.CountOfAllOrderedBooks != null)
+                    {
+                        <span id="total-likes">Count of Rented books: @Model.CountOfOrderedBooks</span>
+                    }
+                }
+
+            </form>
+            <!-- Bonus -->
+        </div>
+    </div>
+    <div class="book-description">
+        <h3>Description:</h3>
+        <p>
+            @Model.Description;
+        </p>
+    </div>
+
+@if (subscription != null && (subscription.Name == "Six Months" ||
+                                     subscription.Name == "Twelve Months"))
+{
+    <div class="container d-flex justify-content-center mt-100 mb-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="likes" action="/Book/Comment" method="post">
+                            @Html.HiddenFor(m => m.BookId)
+                            @Html.TextAreaFor(m => m.ContentComment)
+                            <input class="button submit" type="submit" value="Add Comment">
+                        </form>
+
+                        <h4 class="card-title">Recent Comments</h4>
+                        <h6 class="card-subtitle">Latest Comments section by users</h6>
+                    </div>
+                    @foreach (Comment comment in Model.Comments)
+                    {
+                        <div class="comment-widgets m-b-20">
+                            <div class="d-flex flex-row comment-row">
+                                <div class="p-2"><span class="round"></span></div>
+                                <div class="comment-text w-100">
+                                    <h5 class="commentor-name">@Html.DisplayFor(c => comment.User.FirstName) @Html.DisplayFor(c => comment.User.LastName)</h5>
+                                    <p class="m-b-5 m-t-10">@Html.DisplayFor(c => comment.Content)</p>
+
+                                    <form action="/Book/DeleteComment">
+                                        @Html.HiddenFor(m => m.BookId)
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+</section>
